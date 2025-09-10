@@ -174,11 +174,6 @@ Route::group(['namespace' => 'Smt\Masterweb\Http\Controllers'], function () {
 
     Route::get('elits-release/getSamplePagination', ['as' => 'elits-release.getSamplePagination', 'uses' => 'LaboratoriumReleaseManagement@getSamplePagination']);
 
-    Route::get('elits-release/nota/{id}', ['as' => 'elits-release.nota', 'uses' => 'LaboratoriumPermohonanUjiManagement@nota']);
-    Route::get('elits-release/permintaan-pemeriksaan/{id}', ['as' => 'elits-release.permintaan-pemeriksaan', 'uses' => 'LaboratoriumPermohonanUjiManagement@permintaan_pemeriksaan']);
-    Route::get('elits-release/print_verifikasi/{id}/{idlab}', ['as' => 'elits-release.print_verifikasi', 'uses' => 'LaboratoriumSampleManagement@print_verifikasi']);
-    Route::get('elits-release/sort-labnum/{idLab}/{plusCount}', ['as' => 'elits-release.print_verifikasi', 'uses' => 'LaboratoriumSampleManagement@sortingNumberBylabAndPlusCount']);
-
     // CETAK LAPORAN HARIAN, MINGGUAN, BULANAN
     Route::get('report-daily', [
       'as' => 'report-daily.index',
@@ -228,17 +223,11 @@ Route::group(['namespace' => 'Smt\Masterweb\Http\Controllers'], function () {
     Route::get('report-annual/print-report-annual-maatweb', ['as' => 'report-annual.print-report-annual-maatweb', 'uses' => 'LaboratoriumReportManagement@printReportAnually_to_maatweb']);
 
     Route::get('report/yearly/{date_from?}/{date_to?}/', ['as' => 'report.yearly', 'uses' => 'LaboratoriumReportManagement@yearly']);
-
-    Route::get('elits-release/printLHU/{id}/{idlab}/{ischlor?}', ['as' => 'elits-release.printLHU', 'uses' => 'LaboratoriumSampleManagement@printLHU']);
-    Route::get('elits-release/print-inform-concern/{id}/{idlab}/{ischlor?}', ['as' => 'elits-release.print-inform-concern', 'uses' => 'LaboratoriumSampleManagement@printInformConcern']);
     // CETAK LAPORAN HARIAN, MINGGUAN, BULANAN
 
     // ROUTE MASTER
     Route::resource('elits-release', 'LaboratoriumReleaseManagement');
-    Route::resource('elits-sample-officer', 'LaboratoriumSampleOfficerManagement');
     Route::resource('elits-containers', 'LaboratoriumContainerManagement');
-    Route::resource('elits-packet', 'LaboratoriumPaketManagement');
-    Route::resource('elits-jenis-makanan', 'LaboratoriumJenisMakananManagement');
 
 
 
@@ -264,32 +253,9 @@ Route::group(['namespace' => 'Smt\Masterweb\Http\Controllers'], function () {
     // ROUTE MASTER PROGRAM
     Route::get('data-program', ['as' => 'elits-program.data-program', 'uses' => 'LaboratoriumProgramManagement@data_program']);
     Route::post('elits-program/get-program', 'LaboratoriumProgramManagement@getProgram')->name('getProgram');
-    Route::post('elits-program/get-sampletype', 'LaboratoriumSampleTypeManagement@getSampleType')->name('getSampleType');
     Route::get('elits-program-destroy/{id}', 'LaboratoriumProgramManagement@destroy');
     Route::resource('elits-program', 'LaboratoriumProgramManagement');
 
-    Route::get('elits-permohonan-uji/', ['as' => 'elits-permohonan-uji.index', 'uses' => 'LaboratoriumPermohonanUjiManagement@index']);
-    Route::get('elits-permohonan-uji/pagination', ['as' => 'elits-permohonan-uji.pagination', 'uses' => 'LaboratoriumPermohonanUjiManagement@pagination']);
-
-    Route::get('elits-permohonan-uji/analys/{id}/{id_method?}', ['as' => 'elits-permohonan-uji.analys', 'uses' => 'LaboratoriumPermohonanUjiManagement@analys']);
-
-    Route::get('elits-permohonan-uji/getSamplePagination', ['as' => 'elits-permohonan-uji.getSamplePagination', 'uses' => 'LaboratoriumPermohonanUjiManagement@getSamplePagination']);
-    // Route::post('elits-permohonan-uji/getSamplePagination', ['as' => 'elits-permohonan-uji.getSamplePagination', 'uses' => 'LaboratoriumPermohonanUjiManagement@getSamplePagination']);
-
-    Route::get('elits-permohonan-uji/getIdSample/{id}', ['as' => 'elits-permohonan-uji.getIdSample', 'uses' => 'LaboratoriumPermohonanUjiManagement@getIdSample']);
-    Route::get('elits-permohonan-uji/getPacketDetail/{id}', ['as' => 'elits-permohonan-uji.getPacketDetail', 'uses' => 'LaboratoriumPermohonanUjiManagement@getPacketDetail']);
-    Route::post('elits-permohonan-uji/setPersiapanSample/{id}', ['as' => 'elits-permohonan-uji.setPersiapanSample', 'uses' => 'LaboratoriumPermohonanUjiManagement@setPersiapanSample']);
-    Route::post('elits-permohonan-uji/setSampling/{id}', ['as' => 'elits-permohonan-uji.setSampling', 'uses' => 'LaboratoriumPermohonanUjiManagement@setSampling']);
-    Route::get('elits-permohonan-uji/daftarPengujian/{id}', ['as' => 'elits-permohonan-uji.daftarPengujian', 'uses' => 'LaboratoriumPermohonanUjiManagement@daftarPengujian']);
-    Route::get('elits-permohonan-uji/print/{id}', ['as' => 'elits-permohonan-uji.print', 'uses' => 'LaboratoriumPermohonanUjiManagement@print']);
-    Route::post('elits-permohonan-uji/payment/{id}', ['as' => 'elits-permohonan-uji.payment', 'uses' => 'LaboratoriumPermohonanUjiManagement@payment']);
-    Route::post('elits-permohonan-uji/edit_payment/{id}', ['as' => 'elits-permohonan-uji.edit_payment', 'uses' => 'LaboratoriumPermohonanUjiManagement@edit_payment']);
-
-
-
-    Route::resource('elits-permohonan-uji', 'LaboratoriumPermohonanUjiManagement');
-
-    Route::get('elits-permohonan-uji/elits-permohonan-uji-destroy/{id}', ['as' => 'elits-permohonan-uji.elits-permohonan-uji-destroy', 'uses' => 'LaboratoriumPermohonanUjiManagement@destroy']);
 
     //permohonan uji klinik parameter 2
     Route::post('elits-permohonan-uji-klinik-2/get-parameter-custom-permohonan-uji-klinik-parameter', ['as' => 'elits-permohonan-uji-klinik-2.get-parameter-custom-permohonan-uji-klinik-parameter', 'uses' => 'LaboratoriumPermohonanUjiKlinikParameterManagement2@getDataParameterCustom']);
@@ -497,9 +463,6 @@ Route::group(['namespace' => 'Smt\Masterweb\Http\Controllers'], function () {
     // PRINT FORMULIR PENDAFTARAN2
     Route::get('print-permohonan-uji-klinik-formulir-2/{id}', ['as' => 'elits-permohonan-uji-klinik-2.print-permohonan-uji-klinik-formulir', 'uses' => 'LaboratoriumPermohonanUjiKlinikManagement2@printPermohonanUjiKlinikFormulir']);
 
-    // PRINT BLANGKO PENDAFTARAN (NON KLINIK)
-    Route::get('print-permohonan-uji-blangko/{id}', ['as' => 'elits-permohonan-uji.print-permohonan-uji-blangko', 'uses' => 'LaboratoriumPermohonanUjiManagement@printPermohonanUjiBlangko']);
-
     // PRINT KARTU MEDIS
     Route::get('print-permohonan-uji-klinik-kartu-medis/{id}', ['as' => 'elits-permohonan-uji-klinik.print-permohonan-uji-klinik-kartu-medis', 'uses' => 'LaboratoriumPermohonanUjiKlinikManagement@printPermohonanUjiKlinikKartuMedis']);
 
@@ -534,122 +497,12 @@ Route::group(['namespace' => 'Smt\Masterweb\Http\Controllers'], function () {
     Route::get('elits-label-permohonan-uji-klinik', 'LaboratoriumPermohonanUjiKlinikManagement@label');
     Route::get('elits-label-permohonan-uji-klinik/print', 'LaboratoriumPermohonanUjiKlinikManagement@printLabel')->name('elits-permohonan-uji-klinik.print-label');
 
-    //Delegation Lab
-    Route::get('elits-deligations/{id}', ['as' => 'elits-deligations', 'uses' => 'LaboratoriumDelegationManagement@index']);
-    Route::post('elits-deligations/save/{id}', ['as' => 'elits-deligations.save', 'uses' => 'LaboratoriumDelegationManagement@save']);
-    Route::post('elits-deligations/start/{id}', ['as' => 'elits-deligations.start', 'uses' => 'LaboratoriumDelegationManagement@start']);
-
-    //Delegation Smapling
-    Route::get('elits-deligations-sampling/{id}', ['as' => 'elits-deligations-sampling', 'uses' => 'LaboratoriumDelegationSamplingManagement@index']);
-    Route::post('elits-deligations-sampling/save/{id}', ['as' => 'elits-deligations-sampling.save', 'uses' => 'LaboratoriumDelegationSamplingManagement@save']);
-    Route::post('elits-deligations-sampling/start/{id}', ['as' => 'elits-deligations-sampling.start', 'uses' => 'LaboratoriumDelegationSamplingManagement@start']);
 
     //Pencahayaan Smapling
     Route::get('elits-pencahayaan/{id}', ['as' => 'elits-pencahayaan', 'uses' => 'LaboratoriumPencahayaanManagement@index']);
     Route::post('elits-pencahayaan/save/{id}', ['as' => 'elits-pencahayaan.save', 'uses' => 'LaboratoriumPencahayaanManagement@save']);
     Route::post('elits-pencahayaan/start/{id}', ['as' => 'elits-pencahayaan.start', 'uses' => 'LaboratoriumPencahayaanManagement@start']);
 
-    Route::get('elits-kebisingan/{id}', ['as' => 'elits-kebisingan', 'uses' => 'LaboratoriumKebisinganManagement@index']);
-    Route::post('elits-kebisingan/save/{id}', ['as' => 'elits-kebisingan.save', 'uses' => 'LaboratoriumKebisinganManagement@save']);
-    Route::post('elits-kebisingan/start/{id}', ['as' => 'elits-kebisingan.start', 'uses' => 'LaboratoriumKebisinganManagement@start']);
-
-
-
-
-
-    // Route::get('elits-samples/analys/{id}/{id_method?}', ['as' => 'elits-samples.analys', 'uses' => 'LaboratoriumSampleManagement@analys']);
-
-    // Route::get('elits-samples/getSamplePagination', ['as' => 'elits-samples.getSamplePagination', 'uses' => 'LaboratoriumSampleManagement@getSamplePagination']);
-    // Route::get('elits-samples/getIdSample', ['as' => 'elits-samples.getIdSample', 'uses' => 'LaboratoriumSampleManagement@getIdSample']);
-
-    Route::get('elits-samples/getNewNumberSequence/{lab_key}/{permohonan_uji_id?}/{is_makmin?}', ['as' => 'elits-samples.getNewNumberSequence', 'uses' => 'LaboratoriumSampleManagement@getNewNumberSequence']);
-
-    Route::get('elits-samples/create/{id}/{id_lab?}', ['as' => 'elits-samples.create', 'uses' => 'LaboratoriumSampleManagement@create']);
-    Route::post('elits-samples/update/{id}', ['as' => 'elits-samples.update', 'uses' => 'LaboratoriumSampleManagement@update']);
-    Route::delete('elits-samples/destroy/{id}', ['as' => 'elits-samples.destroy', 'uses' => 'LaboratoriumSampleManagement@destroy']);
-
-    Route::get('elits-samples/list-samples/{idPermohonanUji}/{idSampleType}', ['as' => 'elits-samples.list-samples', 'uses' => 'LaboratoriumSampleManagement@getSamplesByPermohonanUjiAndSampleType']);
-    Route::get('elits-samples/list-samples-by-id-sample/{idSample}/{labId}', ['as' => 'elits-samples.list-samples-by-id-sample', 'uses' => 'LaboratoriumSampleManagement@getSamplesMikroBySampleId']);
-
-
-    Route::get('elits-samples/update-titik/{id}', ['as' => 'elits-samples.update-titik', 'uses' => 'LaboratoriumSampleManagement@updateTitik']);
-
-
-    Route::get('elits-samples-destroy/{id}', 'LaboratoriumSampleManagement@sample_destroy');
-
-    Route::get('elits-samples/check-petugas/{namaPetugas}', ['as' => 'elits-samples.check-petugas', 'uses' => 'LaboratoriumSampleManagement@checkNikAndPassword']);
-    Route::put('elits-samples/update-petugas/{namaPetugas}', ['as' => 'elits-samples.update-petugas', 'uses' => 'LaboratoriumSampleManagement@saveNikAndPassword']);
-
-
-    Route::post('elits-samples/store/{id}', ['as' => 'elits-samples.store', 'uses' => 'LaboratoriumSampleManagement@store']);
-    Route::get('elits-samples/edit/{id}', ['as' => 'elits-samples.edit', 'uses' => 'LaboratoriumSampleManagement@edit']);
-    // Store duplicate
-    Route::get('elits-samples/duplicate/{data}/{id_lab}', [\Smt\Masterweb\Http\Controllers\LaboratoriumSampleManagement::class, 'storeSampleDuplicate'])->name('elits-samples.store-duplicate');
-
-    Route::get('elits-samples/getIdSample/{id}', ['as' => 'elits-samples.getIdSample', 'uses' => 'LaboratoriumSampleManagement@getIdSample']);
-    Route::get('elits-samples/verification/{id}/{idlabs?}', ['as' => 'elits-samples.verification', 'uses' => 'LaboratoriumSampleManagement@verification']);
-
-    //Verifikasi 2
-    Route::get('elits-samples/verification-2/{id}/{idlabs?}', ['as' => 'elits-samples.verification-2', 'uses' => 'LaboratoriumSampleManagement@verification2']);
-    Route::post('elits-samples/verification/analytic/{id_sample}', ['as' => 'elits-samples.verification-analytic-2', 'uses' => 'LaboratoriumSampleManagement@verificationAnalytic']);
-    Route::put('elits-samples/verification-2/update-nama-pengambil/{id}', ['as' => 'elits-samples.update-nama-pengambil', 'uses' => 'LaboratoriumSampleManagement@updateNamaPengambil']);
-
-    Route::get('elits-samples/print/{id}', ['as' => 'elits-samples.print', 'uses' => 'LaboratoriumSampleManagement@print']);
-    Route::get('elits-release/print-kimia/{id}', ['as' => 'elits-release.print-kimia', 'uses' => 'LaboratoriumSampleManagement@printKimia']);
-    Route::get('elits-release/print-kimia-2/{id}', ['as' => 'elits-release.print-kimia-2', 'uses' => 'LaboratoriumSampleManagement@printAllMakanMinum']);
-    Route::get('elits-release/print-mikro/{id}/{sample_type_id?}/{packet_id?}', ['as' => 'elits-release.print-mikro', 'uses' => 'LaboratoriumSampleManagement@printMikro']);
-    Route::get('elits-release/print-mikro-air-bersih-air-minum/{id}', ['as' => 'elits-release.print-mikro-gabungan', 'uses' => 'LaboratoriumSampleManagement@printMikroGabungan']);
-
-    Route::get('elits-samples/sorting-all', ['as' => 'elits-samples.sorting-all', 'uses' => 'LaboratoriumSampleManagement@sortingNumberAll']);
-
-    Route::get('elits-samples/sorting-number-kesmas-by-code', ['as' => 'elits-samples.sorting-all', 'uses' => 'LaboratoriumSampleManagement@sortingNumberKesmasByCodeAll']);
-
-
-
-    // Route::get('elits-release/print-mikro/{id}', ['as' => 'elits-release.print-mikro', 'uses' => 'LaboratoriumSampleManagement@printMikro']);
-
-
-    Route::get('elits-penerimaan-sample/{id}/{idlabs}', ['as' => 'elits-penerimaan-sample.index', 'uses' => 'LaboratoriumPenerimaanSampleManagement@index']);
-    Route::get('elits-penerimaan-sample/store/{id}/{idlabs}', ['as' => 'elits-penerimaan-sample.store', 'uses' => 'LaboratoriumPenerimaanSampleManagement@store']);
-
-    Route::get('elits-penanganan-sample/{id}/{idlabs}', ['as' => 'elits-penanganan-sample.index', 'uses' => 'LaboratoriumPenangananSampleManagement@index']);
-    Route::get('elits-penanganan-sample/store/{id}/{idlabs?}', ['as' => 'elits-penanganan-sample.store', 'uses' => 'LaboratoriumPenangananSampleManagement@store']);
-    Route::get('elits-penanganan-sample/edit/{id}/{idlabs}', ['as' => 'elits-penanganan-sample.edit', 'uses' => 'LaboratoriumPenangananSampleManagement@edit']);
-
-
-    Route::post('elits-baca-hasil/save/{id}/{idlabs}/{idprogress}', ['as' => 'elits-baca-hasil.save', 'uses' => 'LaboratoriumAnalitikSampleManagement@baca_hasil_save']);
-
-    Route::get('elits-baca-hasil/{id}/{idlabs}/{idprogress}', ['as' => 'elits-baca-hasil.index', 'uses' => 'LaboratoriumAnalitikSampleManagement@baca_hasil']);
-    Route::post('elits-baca-hasil/{id}/{idlabs}/{idprogress}', ['as' => 'elits-baca-hasil.store', 'uses' => 'LaboratoriumAnalitikSampleManagement@baca_hasil_store']);
-
-
-    Route::get('elits-inkubasi/{id}/{idlabs}/{idprogress}', ['as' => 'elits-inkubasi.index', 'uses' => 'LaboratoriumAnalitikSampleManagement@inkubasi']);
-    Route::post('elits-inkubasi/{id}/{idlabs}/{idprogress}', ['as' => 'elits-inkubasi.store', 'uses' => 'LaboratoriumAnalitikSampleManagement@inkubasi_store']);
-
-    Route::get('elits-pemeriksaan-alat/{id}/{idlabs}/{idprogress}', ['as' => 'elits-pemeriksaan-alat.index', 'uses' => 'LaboratoriumAnalitikSampleManagement@pemeriksaan_alat']);
-    Route::post('elits-pemeriksaan-alat/{id}/{idlabs}/{idprogress}', ['as' => 'elits-pemeriksaan-alat.store', 'uses' => 'LaboratoriumAnalitikSampleManagement@pemeriksaan_alat_store']);
-
-    Route::get('elits-persiapan-reagen/{id}/{idlabs}/{idprogress}', ['as' => 'elits-persiapan-reagen.index', 'uses' => 'LaboratoriumAnalitikSampleManagement@persiapan_reagen']);
-    Route::post('elits-persiapan-reagen/{id}/{idlabs}/{idprogress}', ['as' => 'elits-persiapan-reagen.store', 'uses' => 'LaboratoriumAnalitikSampleManagement@persiapan_reagen_store']);
-
-
-    Route::get('elits-preparasi/{id}/{idlabs}/{idprogress}', ['as' => 'elits-preparasi.index', 'uses' => 'LaboratoriumAnalitikSampleManagement@preparasi']);
-    Route::post('elits-preparasi/{id}/{idlabs}/{idprogress}', ['as' => 'elits-preparasi.store', 'uses' => 'LaboratoriumAnalitikSampleManagement@preparasi_store']);
-
-    Route::get('elits-pipetase/{id}/{idlabs}/{idprogress}', ['as' => 'elits-pipetase.index', 'uses' => 'LaboratoriumAnalitikSampleManagement@pipetase']);
-    Route::post('elits-pipetase/{id}/{idlabs}/{idprogress}', ['as' => 'elits-pipetase.store', 'uses' => 'LaboratoriumAnalitikSampleManagement@pipetase_store']);
-
-
-
-    Route::get('elits-pemeriksaan/{id}/{idlabs}/{idprogress}', ['as' => 'elits-pemeriksaan.index', 'uses' => 'LaboratoriumAnalitikSampleManagement@pemeriksaan']);
-    Route::post('elits-pemeriksaan/{id}/{idlabs}/{idprogress}', ['as' => 'elits-pemeriksaan.store', 'uses' => 'LaboratoriumAnalitikSampleManagement@pemeriksaan_store']);
-
-
-    Route::get('elits-samples/{id}', ['as' => 'elits-samples.index', 'uses' => 'LaboratoriumSampleManagement@index']);
-    // Route::post('elits-samples/{id}', ['as' => 'elits-samples.index', 'uses' => 'LaboratoriumSampleManagement@index']);
-
-    Route::get('elits-pelaporan-hasil/{id}/{idlabs}', ['as' => 'elits-pelaporan-hasil.index', 'uses' => 'LaboratoriumPelaporanHasilManagement@create']);
-    Route::post('elits-pelaporan-hasil/{id}/{idlabs}/', ['as' => 'elits-pelaporan-hasil.store', 'uses' => 'LaboratoriumPelaporanHasilManagement@store']);
 
     Route::get('elits-pengetikan-hasil/{id}/{idlabs}', ['as' => 'elits-pengetikan-hasil.index', 'uses' => 'LaboratoriumPengetikanHasilManagement@create']);
     Route::post('elits-pengetikan-hasil/{id}/{idlabs}/', ['as' => 'elits-pengetikan-hasil.store', 'uses' => 'LaboratoriumPengetikanHasilManagement@store']);
@@ -659,9 +512,6 @@ Route::group(['namespace' => 'Smt\Masterweb\Http\Controllers'], function () {
 
     Route::get('elits-pengesahan-hasil/{id}/{idlabs}', ['as' => 'elits-pengesahan-hasil.index', 'uses' => 'LaboratoriumPengesahanHasilManagement@create']);
     Route::post('elits-pengesahan-hasil/{id}/{idlabs}/', ['as' => 'elits-pengesahan-hasil.store', 'uses' => 'LaboratoriumPengesahanHasilManagement@store']);
-
-
-    // Route::resource('elits-samples','LaboratoriumSampleManagement');
 
 
     Route::resource('elits-rates', 'LaboratoriumTarifManagement');
@@ -683,39 +533,6 @@ Route::group(['namespace' => 'Smt\Masterweb\Http\Controllers'], function () {
 
 
 
-    // Route Data Matriks Jenis Sarana
-    Route::resource('matriks-jenis-sarana', 'LaboratoriumMatriksJenisSaranaManagement');
-    Route::post('matriks-jenis-sarana/store', ['as' => 'matriks-jenis-sarana-store', 'uses' => 'LaboratoriumMatriksJenisSaranaManagement@store']);
-    Route::get('matriks-jenis-sarana/edit/{id}', ['as' => 'matriks-jenis-sarana-edit', 'uses' => 'LaboratoriumMatriksJenisSaranaManagement@edit']);
-    Route::post('matriks-jenis-sarana/update', ['as' => 'matriks-jenis-sarana-update', 'uses' => 'LaboratoriumMatriksJenisSaranaManagement@update']);
-    Route::post('matriks-jenis-sarana/get-matriks-jenis-sarana-by-select2', ['as' => 'matriks-jenis-sarana.get-matriks-jenis-sarana-by-select2', 'uses' => 'LaboratoriumMatriksJenisSaranaManagement@getMatriksJenisSaranaSelect2']);
-    Route::get('matriks-jenis-sarana/delete/{id}', ['as' => 'matriks-jenis-sarana-delete', 'uses' => 'LaboratoriumMatriksJenisSaranaManagement@destroy']);
-
-
-    Route::resource('elits-industries', 'LaboratoriumIndustryManagement');
-    Route::get('elits-methods/load/{id}/{id_samples}', ['as' => 'elits-methods.load', 'uses' => 'LaboratoriumMethodManagement@load']);
-
-
-    // Route::get('elits-baku-mutu-kimia/create', ['as' => 'elits-baku-mutu-kimia.create', 'uses' => 'LaboratoriumBakuMutuKimiaManagement@create']);
-    // Route::post('elits-baku-mutu-kimia/{id}', ['as' => 'elits-baku-mutu-kimia.update', 'uses' => 'LaboratoriumBakuMutuKimiaManagement@update']);
-
-    // ROUTE BAKU MUTU
-
-    Route::get('elits-baku-mutu-kimia-destroy/{id}', ['as' => 'elits-baku-mutu-kimia-destroy', 'uses' => 'LaboratoriumBakuMutuKimiaManagement@destroy']);
-    Route::resource('elits-baku-mutu-kimia', 'LaboratoriumBakuMutuKimiaManagement');
-    // Route::get('elits-baku-mutu-mikro/create', ['as' => 'elits-baku-mutu-mikro.create', 'uses' => 'LaboratoriumBakuMutuMikroManagement@create']);
-    // Route::delete('elits-baku-mutu-mikro/{id}', ['as' => 'elits-baku-mutu-mikro.destroy', 'uses' => 'LaboratoriumBakuMutuMikroManagement@destroy']);
-
-    Route::get('elits-baku-mutu-mikro-destroy/{id}', ['as' => 'elits-baku-mutu-mikro-destroy', 'uses' => 'LaboratoriumBakuMutuMikroManagement@destroy']);
-    Route::resource('elits-baku-mutu-mikro', 'LaboratoriumBakuMutuMikroManagement');
-
-    // START ROUTE CUSTOM
-    // Route resync antara data suspend device di sql dan di firebase
-    // route ini menjalankan perintah
-    Route::get('resync-format-baku-mutu', [
-      'as' => 'resync-format-baku-mutu',
-      'uses' => 'LaboratoriumBakuMutuMikroManagement@resyncFormatBakuMutu',
-    ]);
     // END ROUTE CUSTOM
 
     Route::get('elits-baku-mutu-klinik/data-baku-mutu-klinik', ['as' => 'elits-baku-mutu-klinik.data-baku-mutu-klinik', 'uses' => 'LaboratoriumBakuMutuKlinikManagement@data_baku_mutu_klinik']);
@@ -726,15 +543,6 @@ Route::group(['namespace' => 'Smt\Masterweb\Http\Controllers'], function () {
     Route::resource('elits-baku-mutu-klinik', 'LaboratoriumBakuMutuKlinikManagement');
     //Module
 
-    Route::post('elits-module-methods/formA/{id}/{id_samples}', ['as' => 'elits-module-methods.formA', 'uses' => 'LaboratoriumModuleMethodManagement@formA']);
-    Route::post('elits-module-methods/formB/{id}/{id_samples}', ['as' => 'elits-module-methods.formB', 'uses' => 'LaboratoriumModuleMethodManagement@formB']);
-    Route::post('elits-module-methods/forC/{id}/{id_samples}', ['as' => 'elits-module-methods.formC', 'uses' => 'LaboratoriumModuleMethodManagement@formC']);
-
-    Route::post('elits-module-methods/formD/{id}/{id_samples}', ['as' => 'elits-module-methods.formD', 'uses' => 'LaboratoriumModuleMethodManagement@formD']);
-    Route::post('elits-module-methods/formE/{id}/{id_samples}', ['as' => 'elits-module-methods.formE', 'uses' => 'LaboratoriumModuleMethodManagement@formE']);
-
-
-    Route::resource('elits-methods', 'LaboratoriumMethodManagement');
 
     Route::get('elits-analys/klinik', ['as' => 'elits-analys.klinik', 'uses' => 'LaboratoriumAnalysManagement@index_klinik']);
 
@@ -758,8 +566,6 @@ Route::group(['namespace' => 'Smt\Masterweb\Http\Controllers'], function () {
 
     Route::post('elits-libraries/getLibrary', 'LaboratoriumLibraryManagement@getLibrary')->name('getLibrary');
     Route::resource('elits-libraries', 'LaboratoriumLibraryManagement');
-
-    Route::resource('elits-customers', 'LaboratoriumCustomerManagement');
 
     Route::post('elits-units/getDataUnitBySelect', 'LaboratoriumUnitManagement@getDataUnitBySelect')->name('getDataUnitBySelect');
     Route::resource('elits-units', 'LaboratoriumUnitManagement');
@@ -793,11 +599,6 @@ Route::group(['namespace' => 'Smt\Masterweb\Http\Controllers'], function () {
     Route::get('elits-rekam-medis-detail-hasil/{id}', ['as' => 'elits-rekam-medis-detail-hasil', 'uses' => 'LaboratoriumRekamMedisKlinikController@show_detail_hasil']);
     /* Route::get('elits-rekam-medis-detail-show/{id}', ['as' => 'elits-rekam-medis-show', 'uses' => 'LaboratoriumRekamMedisKlinikController@show']); */
     Route::get('elits-rekam-medis-detail-destroy/{id}', 'LaboratoriumRekamMedisKlinikController@destroy_detail')->name('elits-rekam-medis-detail-destroy');
-
-    // route laporan pendapatan
-    Route::get('elits-pendapatan-nonklinik', ['as' => 'elits-pendapatan-nonklinik', 'uses' => 'LaboratoriumPendapatanNonklinikController@index']);
-    Route::post('elits-pendapatan-nonklinik-count', ['as' => 'elits-pendapatan-nonklinik-count', 'uses' => 'LaboratoriumPendapatanNonklinikController@getCountTotalPendapatan']);
-    Route::get('elits-pendapatan-nonklinik-set-print', ['as' => 'elits-pendapatan-nonklinik-set-print', 'uses' => 'LaboratoriumPendapatanNonklinikController@setPrintDataPeriodikNonklinik']);
 
     Route::get('elits-rekam-medis-detail-destroy/{id}', 'LaboratoriumRekamMedisKlinikController@destroy_detail')->name('elits-rekam-medis-detail-destroy');
 
